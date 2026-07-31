@@ -4,13 +4,20 @@
 
 插件会在上报前自动补充 App 版本、设备信息、系统版本、IP 定位信息等公共字段，并使用 AES 加密后提交到业务接口。
 
+## 功能
+
+- Android Google Play 订阅数据上报。
+- iOS App Store 订阅数据上报。
+- iOS 内部自动通过 `qs_asa_attribution_info` 获取 Apple Ads attribution token。
+- 首次上报失败后，本地保存已加密请求并在后台异步补报。
+
 ## 安装
 
 在项目的 `pubspec.yaml` 中添加依赖：
 
 ```yaml
 dependencies:
-  qs_subscribe_report: ^1.0.0
+  qs_subscribe_report: ^1.0.1
 ```
 
 然后执行：
@@ -18,6 +25,14 @@ dependencies:
 ```shell
 flutter pub get
 ```
+
+## 公开方法
+
+| 方法 | 说明 |
+| --- | --- |
+| `reportAndroidSubscribtionInfo` | 上报 Android Google Play 订阅数据 |
+| `reportIOSSubscribtionInfo` | 上报 iOS App Store 订阅数据 |
+| `retryFailedSubscribtionReports` | App 重启后唤醒失败订阅数据补报 |
 
 ## 失败补报
 
@@ -102,7 +117,6 @@ final success = await QsSubscribeReport.reportIOSSubscribtionInfo(
   aesSctToken: 'your sct token',
   userId: 'user_id',
   fcmId: 'firebase_cloud_messaging_id',
-  attributionToken: 'apple_ads_attribution_token',
   originTransactionId: 'app_store_original_transaction_id',
   originalPurchaseDateMs: '1710000000000',
   locale: 'zh_CN',
@@ -115,6 +129,8 @@ if (success) {
 }
 ```
 
+插件会在 iOS 内部通过 `qs_asa_attribution_info` 获取 Apple Ads attribution token，并随订阅数据一起上报；业务方不需要传入 attribution token。获取失败、系统不支持或当前平台不支持时会降级为空字符串，不阻塞订阅上报。
+
 ### iOS 参数说明
 
 | 参数 | 说明 |
@@ -125,7 +141,6 @@ if (success) {
 | `aesSctToken` | 请求头 `sct` token |
 | `userId` | 用户 ID |
 | `fcmId` | Firebase Cloud Messaging ID |
-| `attributionToken` | Apple Ads attribution token |
 | `originTransactionId` | App Store 原始交易 ID |
 | `originalPurchaseDateMs` | 原始购买时间戳，单位毫秒 |
 | `locale` | 当前语言地区标识，例如 `zh_CN`、`en_US` |
@@ -160,6 +175,7 @@ sct: aesSctToken
 ## 注意事项
 
 - JSON 编码失败或 AES 加密失败属于本地不可恢复错误，不会进入失败补报队列。
+- iOS Apple Ads attribution token 由插件内部自动获取，调用方不需要也不能通过 `reportIOSSubscribtionInfo` 传入。
 - 后台补报只在当前 Dart isolate 存活期间持续运行。
 - App 重启后，需要业务方主动调用 `QsSubscribeReport.retryFailedSubscribtionReports()` 恢复本地失败队列。
 - 当前公开方法名保留 `Subscribtion` 拼写，以兼容已有调用方。

@@ -1,6 +1,6 @@
 name: qs_subscribe_report
 description: "订阅上报插件"
-version: 1.0.0
+version: 1.0.1
 homepage: "https://github.com/FallPine-Flutter/qs_subscribe_report"
 
 environment:
@@ -10,13 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
   qs_net_request: ^1.0.0 # 网络请求库
   qs_aes_encrypt: ^1.0.0  # 加密工具库
   ip_location: ^1.0.0 # IP位置工具
   qs_log: ^1.0.0  # 日志工具库
   qs_device_info: ^1.0.0  # 设备信息工具库
   qs_storage_tool: ^0.0.1    # 存储工具库
+  qs_asa_attribution_info: ^1.0.0 # Apple Search Ads 归因信息工具
 
 dev_dependencies:
   flutter_test:

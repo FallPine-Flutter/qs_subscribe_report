@@ -567,6 +567,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  qs_asa_attribution_info:
+    dependency: transitive
+    description:
+      name: qs_asa_attribution_info
+      sha256: "19f7dc2e83d9bedbdacd0ca22eae8f822f9dd02b98f5a1aa2495a060b27ffdf7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   qs_device_info:
     dependency: transitive
     description:
@@ -613,7 +621,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
   qs_toast:
     dependency: transitive
     description:

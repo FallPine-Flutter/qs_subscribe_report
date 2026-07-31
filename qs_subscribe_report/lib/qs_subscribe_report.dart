@@ -3,13 +3,13 @@ import 'dart:convert';
 
 import 'package:ip_location/ip_location.dart';
 import 'package:ip_location/ip_location_model.dart';
+import 'package:qs_asa_attribution_info/qs_asa_attribution_info.dart';
 import 'package:qs_aes_encrypt/qs_aes_encrypt.dart';
 import 'package:qs_device_info/qs_device_info.dart';
 import 'package:qs_log/qs_log.dart';
 import 'package:qs_net_request/qs_net_request.dart';
 import 'package:qs_storage_tool/qs_storage_tool.dart';
 
-import 'qs_subscribe_report_platform_interface.dart';
 import 'failed_subscribtion_report.dart';
 
 class QsSubscribeReport {
@@ -18,10 +18,6 @@ class QsSubscribeReport {
   static const int _maxRetryDelaySeconds = 60;
 
   static bool _isRetryLoopRunning = false;
-
-  Future<String?> getPlatformVersion() {
-    return QsSubscribeReportPlatform.instance.getPlatformVersion();
-  }
 
   /// App 重启后主动恢复失败订阅数据上报
   ///
@@ -117,8 +113,6 @@ class QsSubscribeReport {
     required String userId,
     // Firebase Cloud Messaging ID
     required String fcmId,
-    // Apple Ads attribution token
-    required String attributionToken,
     // App Store 原始交易 ID
     required String originTransactionId,
     // 原始购买时间戳，单位毫秒
@@ -128,6 +122,8 @@ class QsSubscribeReport {
   }) async {
     // 获取位置信息
     final location = await _getLocationByIp();
+    final attributionToken =
+        await QsAsaAttributionInfo.getAttributionToken() ?? "";
 
     Map<String, dynamic> params = {
       "userId": userId,
