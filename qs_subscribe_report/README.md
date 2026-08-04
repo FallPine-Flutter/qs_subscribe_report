@@ -6,7 +6,7 @@
 
 ## 功能
 
-- Android Google Play 订阅数据上报。
+- Android Google Play 订阅数据上报，支持携带 Google Play 混淆账号 ID。
 - iOS App Store 订阅数据上报。
 - iOS 内部自动通过 `qs_asa_attribution_info` 获取 Apple Ads attribution token。
 - 首次上报失败后，本地保存已加密请求并在后台异步补报。
@@ -17,7 +17,7 @@
 
 ```yaml
 dependencies:
-  qs_subscribe_report: ^1.0.1
+  qs_subscribe_report: ^1.0.2
 ```
 
 然后执行：
@@ -77,6 +77,7 @@ final success = await QsSubscribeReport.reportAndroidSubscribtionInfo(
   offerId: 'offer_id',
   purchaseType: 'subscribe',
   isFreeTrial: false,
+  obfuscatedAccountId: 'google_play_obfuscated_account_id',
   locale: 'zh_CN',
 );
 
@@ -103,6 +104,7 @@ if (success) {
 | `offerId` | Google Play offer ID |
 | `purchaseType` | 购买类型 |
 | `isFreeTrial` | 是否为免费试用 |
+| `obfuscatedAccountId` | Google Play 混淆账号 ID |
 | `locale` | 当前语言地区标识，例如 `zh_CN`、`en_US` |
 
 ## iOS 订阅上报

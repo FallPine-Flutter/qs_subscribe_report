@@ -1,6 +1,6 @@
 name: qs_subscribe_report
 description: "订阅上报插件"
-version: 1.0.1
+version: 1.0.2
 homepage: "https://github.com/FallPine-Flutter/qs_subscribe_report"
 
 environment:

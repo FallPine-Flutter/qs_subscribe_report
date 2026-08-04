@@ -52,6 +52,8 @@ class QsSubscribeReport {
     required String purchaseType,
     // 是否为免费试用
     required bool isFreeTrial,
+    // Google Play 混淆账号 ID
+    required String obfuscatedAccountId,
     // 当前语言地区标识
     required String locale,
   }) async {
@@ -74,6 +76,7 @@ class QsSubscribeReport {
       "country": location?.countryCode ?? "",
       "timezone": location?.timezone ?? "",
       "locale": locale,
+      "obfuscatedAccountId": obfuscatedAccountId,
     };
 
     final content = _myJsonEncode(params);
