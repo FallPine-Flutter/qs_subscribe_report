@@ -9,6 +9,7 @@ import 'package:qs_device_info/qs_device_info.dart';
 import 'package:qs_log/qs_log.dart';
 import 'package:qs_net_request/qs_net_request.dart';
 import 'package:qs_storage_tool/qs_storage_tool.dart';
+import 'package:qs_subscribe_report/qs_subscribe_report_ios_api_parameter_name_model.dart';
 
 import 'failed_subscribtion_report.dart';
 
@@ -106,6 +107,8 @@ class QsSubscribeReport {
   static Future<bool> reportIOSSubscribtionInfo({
     // 订阅上报接口地址
     required String apiUrl,
+    // API 参数名
+    required QsSubscribeReportIosApiParameterNameModel apiParameterNameModel,
     // AES 加密密钥
     required String aesSecretKey,
     // AES 加密 IV
@@ -129,20 +132,20 @@ class QsSubscribeReport {
         await QsAsaAttributionInfo.getAttributionToken() ?? "";
 
     Map<String, dynamic> params = {
-      "userId": userId,
-      "fcmId": fcmId,
-      "appVersion": await _getAppVersion(),
-      "deviceType": _getDeviceType(),
-      "devicePlatform": await _getDeviceModel(),
-      "deviceOSVersion": await _getDeviceOSVersion(),
-      "locale": locale,
-      "timezone": location?.timezone ?? "",
-      "ipCountry": location?.country ?? "",
-      "ipState": location?.regionName ?? "",
-      "ipCity": location?.city ?? "",
-      "attributionToken": attributionToken,
-      "originTransactionId": originTransactionId,
-      "originalPurchaseDateMs": originalPurchaseDateMs,
+      apiParameterNameModel.userId: userId,
+      apiParameterNameModel.fcmId: fcmId,
+      apiParameterNameModel.appVersion: await _getAppVersion(),
+      apiParameterNameModel.deviceType: _getDeviceType(),
+      apiParameterNameModel.deviceModel: await _getDeviceModel(),
+      apiParameterNameModel.deviceOSVersion: await _getDeviceOSVersion(),
+      apiParameterNameModel.locale: locale,
+      apiParameterNameModel.timezone: location?.timezone ?? "",
+      apiParameterNameModel.ipCountry: location?.country ?? "",
+      apiParameterNameModel.ipState: location?.regionName ?? "",
+      apiParameterNameModel.ipCity: location?.city ?? "",
+      apiParameterNameModel.attributionToken: attributionToken,
+      apiParameterNameModel.originTransactionId: originTransactionId,
+      apiParameterNameModel.originalPurchaseDateMs: originalPurchaseDateMs,
     };
 
     final content = _myJsonEncode(params);
