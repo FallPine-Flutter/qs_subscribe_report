@@ -8,9 +8,6 @@ class QsSubscribeReportIosApiParameterNameModel {
     required this.deviceOSVersion,
     required this.locale,
     required this.timezone,
-    required this.ipCountry,
-    required this.ipState,
-    required this.ipCity,
     required this.attributionToken,
     required this.originTransactionId,
     required this.originalPurchaseDateMs,
@@ -32,12 +29,6 @@ class QsSubscribeReportIosApiParameterNameModel {
   final String locale;
   // 时区
   final String timezone;
-  // IP国家
-  final String ipCountry;
-  // IP省份
-  final String ipState;
-  // IP城市
-  final String ipCity;
   // 归因Token
   final String attributionToken;
   // 原始交易ID

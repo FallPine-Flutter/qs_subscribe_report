@@ -17,7 +17,7 @@
 
 ```yaml
 dependencies:
-  qs_subscribe_report: ^1.0.3
+  qs_subscribe_report: ^1.0.4
 ```
 
 然后执行：
