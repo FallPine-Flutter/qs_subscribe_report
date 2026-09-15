@@ -1,0 +1,54 @@
+# macOS and editor user state
+.DS_Store
+*.log
+*.swp
+*.iml
+*.ipr
+*.iws
+**/.idea/
+
+# Dart, Flutter, and Pub generated files
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.pub/
+**/.pub-cache/
+**/build/
+**/coverage/
+**/doc/api/
+**/lcov.info
+**/app.*.symbols
+**/app.*.map.json
+**/*.symbols
+**/*.dSYM/
+
+# Keep the example lock file for reproducible example builds. The plugin-level
+# .gitignore excludes only qs_subscribe_report/pubspec.lock.
+
+# FVM SDK symlink; keep version selection files such as .fvmrc.
+**/.fvm/flutter_sdk
+
+# Android generated files and local signing configuration
+**/android/.gradle/
+**/android/.cxx/
+**/android/local.properties
+**/android/captures/
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+**/android/**/*.keystore
+**/android/**/*.jks
+
+# iOS generated dependencies, configuration, and user state
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/DerivedData/
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/**/GeneratedPluginRegistrant.h
+**/ios/**/GeneratedPluginRegistrant.m
+**/ios/**/xcuserdata/
+**/*.xcarchive
+**/*.ipa
