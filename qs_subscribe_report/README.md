@@ -17,7 +17,7 @@
 
 ```yaml
 dependencies:
-  qs_subscribe_report: ^1.0.4
+  qs_subscribe_report: ^1.0.5
 ```
 
 然后执行：
@@ -109,11 +109,30 @@ if (success) {
 
 ## iOS 订阅上报
 
-调用 `reportIOSSubscribtionInfo` 上报 App Store 订阅数据：
+调用 `reportIOSSubscribtionInfo` 上报 App Store 订阅数据。通过
+`QsSubscribeReportIosApiParameterNameModel` 配置业务服务端实际使用的字段名：
 
 ```dart
+import 'package:qs_subscribe_report/qs_subscribe_report.dart';
+import 'package:qs_subscribe_report/qs_subscribe_report_ios_api_parameter_name_model.dart';
+
+final apiParameterNameModel = QsSubscribeReportIosApiParameterNameModel(
+  userId: 'userId',
+  fcmId: 'fcmId',
+  appVersion: 'appVersion',
+  deviceType: 'deviceType',
+  deviceModel: 'deviceModel',
+  deviceOSVersion: 'deviceOsVersion',
+  locale: 'locale',
+  timezone: 'timezone',
+  attributionToken: 'attributionToken',
+  originTransactionId: 'originTransactionId',
+  originalPurchaseDateMs: 'originalPurchaseDateMs',
+);
+
 final success = await QsSubscribeReport.reportIOSSubscribtionInfo(
   apiUrl: 'https://example.com/api/subscribe/ios/report',
+  apiParameterNameModel: apiParameterNameModel,
   aesSecretKey: 'your aes secret key',
   aesIv: 'your aes iv',
   aesSctToken: 'your sct token',
@@ -138,6 +157,7 @@ if (success) {
 | 参数 | 说明 |
 | --- | --- |
 | `apiUrl` | 订阅上报接口地址 |
+| `apiParameterNameModel` | iOS 上报内容的业务字段名映射 |
 | `aesSecretKey` | AES 加密密钥 |
 | `aesIv` | AES 加密 IV |
 | `aesSctToken` | 请求头 `sct` token |
@@ -146,6 +166,25 @@ if (success) {
 | `originTransactionId` | App Store 原始交易 ID |
 | `originalPurchaseDateMs` | 原始购买时间戳，单位毫秒 |
 | `locale` | 当前语言地区标识，例如 `zh_CN`、`en_US` |
+
+### iOS 字段名映射
+
+`QsSubscribeReportIosApiParameterNameModel` 的每个属性值都是发送给业务服务端的
+JSON 字段名。调用方应按照服务端协议传入非空且不重复的字段名：
+
+| 属性 | 对应数据 |
+| --- | --- |
+| `userId` | 用户 ID |
+| `fcmId` | Firebase Cloud Messaging ID |
+| `appVersion` | App 版本 |
+| `deviceType` | 设备类型 |
+| `deviceModel` | 设备型号 |
+| `deviceOSVersion` | 设备操作系统版本 |
+| `locale` | 当前语言地区标识 |
+| `timezone` | IP 定位得到的时区 |
+| `attributionToken` | Apple Ads attribution token |
+| `originTransactionId` | App Store 原始交易 ID |
+| `originalPurchaseDateMs` | 原始购买时间戳 |
 
 ## 服务端返回约定
 

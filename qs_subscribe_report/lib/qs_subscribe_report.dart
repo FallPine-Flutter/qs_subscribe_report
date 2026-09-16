@@ -10,7 +10,7 @@ import 'package:qs_net_request/qs_net_request.dart';
 import 'package:qs_storage_tool/qs_storage_tool.dart';
 import 'package:qs_subscribe_report/qs_subscribe_report_ios_api_parameter_name_model.dart';
 
-import 'failed_subscribtion_report.dart';
+import 'qs_failed_subscribtion_report.dart';
 
 class QsSubscribeReport {
   static const String _failedReportsStorageKey =
@@ -183,7 +183,7 @@ class QsSubscribeReport {
 
     await _saveFailedSubscribtionReport(
       // 只持久化已加密内容，避免把明文订阅参数和 AES 信息落盘。
-      FailedSubscribtionReport(
+      QsFailedSubscribtionReport(
         id: _createFailedReportId(),
         apiUrl: apiUrl,
         data: encryptedParams,
@@ -287,7 +287,7 @@ class QsSubscribeReport {
     }
   }
 
-  static Future<List<FailedSubscribtionReport>>
+  static Future<List<QsFailedSubscribtionReport>>
   _getFailedSubscribtionReports() async {
     try {
       final reportJsonList = await QsStorageTool.getStringList(
@@ -297,14 +297,14 @@ class QsSubscribeReport {
         return [];
       }
 
-      final reports = <FailedSubscribtionReport>[];
+      final reports = <QsFailedSubscribtionReport>[];
       for (final reportJson in reportJsonList) {
         final reportMap = jsonDecode(reportJson);
         if (reportMap is! Map<String, dynamic>) {
           continue;
         }
 
-        final report = FailedSubscribtionReport.fromJson(reportMap);
+        final report = QsFailedSubscribtionReport.fromJson(reportMap);
         if (report.id.isEmpty ||
             report.apiUrl.isEmpty ||
             report.data.isEmpty ||
@@ -321,14 +321,14 @@ class QsSubscribeReport {
   }
 
   static Future<void> _saveFailedSubscribtionReport(
-    FailedSubscribtionReport report,
+    QsFailedSubscribtionReport report,
   ) async {
     await _replaceFailedSubscribtionReport(report);
     QsLog.info("订阅数据上报失败，已加入后台重试队列");
   }
 
   static Future<void> _replaceFailedSubscribtionReport(
-    FailedSubscribtionReport report,
+    QsFailedSubscribtionReport report,
   ) async {
     try {
       final reports = await _getFailedSubscribtionReports();
@@ -355,7 +355,7 @@ class QsSubscribeReport {
   }
 
   static Future<void> _setFailedSubscribtionReports(
-    List<FailedSubscribtionReport> reports,
+    List<QsFailedSubscribtionReport> reports,
   ) async {
     final reportJsonList = reports
         .map((report) => jsonEncode(report.toJson()))

@@ -1,6 +1,6 @@
 name: qs_subscribe_report
 description: "订阅上报插件"
-version: 1.0.4
+version: 1.0.5
 homepage: "https://github.com/FallPine-Flutter/qs_subscribe_report"
 
 environment:
@@ -10,20 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  qs_net_request: # 网络请求库
-    path: ../../qs_net_request/qs_net_request
-  qs_aes_encrypt: # 加密工具库
-    path: ../../qs_aes_encrypt/qs_aes_encrypt
-  qs_ip_location: # IP位置工具
-    path: ../../qs_ip_location/qs_ip_location
-  qs_log: # 日志工具库
-    path: ../../qs_log/qs_log
-  qs_device_info: # 设备信息工具库
-    path: ../../qs_device_info/qs_device_info
-  qs_storage_tool: # 存储工具库
-    path: ../../qs_storage_tool/qs_storage_tool
-  qs_asa_attribution_info: # Apple Search Ads 归因信息工具
-    path: ../../qs_asa_attribution_info/qs_asa_attribution_info
+  qs_net_request: ^1.0.1 # 网络请求库
+  qs_aes_encrypt: ^1.0.0 # 加密工具库
+  qs_ip_location: ^1.0.1 # IP位置工具
+  qs_log: ^1.0.0 # 日志工具库
+  qs_device_info: ^1.0.3 # 设备信息工具库
+  qs_storage_tool: ^1.0.0 # 存储工具库
+  qs_asa_attribution_info: ^1.0.0 # Apple Search Ads 归因信息工具
 
 dev_dependencies:
   flutter_test:

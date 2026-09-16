@@ -23,8 +23,11 @@
 **/*.symbols
 **/*.dSYM/
 
-# Keep the example lock file for reproducible example builds. The plugin-level
-# .gitignore excludes only qs_subscribe_report/pubspec.lock.
+# Bundled example dependency resolution files
+**/example/pubspec.lock
+**/example/ios/Podfile
+**/example/ios/Flutter/Debug.xcconfig
+**/example/ios/Flutter/Release.xcconfig
 
 # FVM SDK symlink; keep version selection files such as .fvmrc.
 **/.fvm/flutter_sdk

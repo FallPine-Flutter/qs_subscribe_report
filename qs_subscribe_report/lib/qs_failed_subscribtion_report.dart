@@ -1,5 +1,5 @@
-class FailedSubscribtionReport {
-  const FailedSubscribtionReport({
+class QsFailedSubscribtionReport {
+  const QsFailedSubscribtionReport({
     required this.id,
     required this.apiUrl,
     required this.data,
@@ -15,8 +15,8 @@ class FailedSubscribtionReport {
   final int failedCount;
   final int nextRetryTimeMs;
 
-  factory FailedSubscribtionReport.fromJson(Map<String, dynamic> json) {
-    return FailedSubscribtionReport(
+  factory QsFailedSubscribtionReport.fromJson(Map<String, dynamic> json) {
+    return QsFailedSubscribtionReport(
       id: json["id"] as String? ?? "",
       apiUrl: json["apiUrl"] as String? ?? "",
       data: json["data"] as String? ?? "",
@@ -26,7 +26,7 @@ class FailedSubscribtionReport {
     );
   }
 
-  FailedSubscribtionReport copyWith({
+  QsFailedSubscribtionReport copyWith({
     String? id,
     String? apiUrl,
     String? data,
@@ -34,7 +34,7 @@ class FailedSubscribtionReport {
     int? failedCount,
     int? nextRetryTimeMs,
   }) {
-    return FailedSubscribtionReport(
+    return QsFailedSubscribtionReport(
       id: id ?? this.id,
       apiUrl: apiUrl ?? this.apiUrl,
       data: data ?? this.data,
