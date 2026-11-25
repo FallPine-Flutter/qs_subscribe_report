@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:qs_ip_location/qs_ip_location.dart';
 import 'package:qs_asa_attribution_info/qs_asa_attribution_info.dart';
 import 'package:qs_aes_encrypt/qs_aes_encrypt.dart';
@@ -95,6 +96,10 @@ class QsSubscribeReport {
       return false;
     }
 
+    if (kDebugMode) {
+      QsLog.info("订阅上报请求: $apiUrl\n接口参数: $content");
+    }
+
     return _reportEncryptedSubscribtionInfo(
       apiUrl: apiUrl,
       encryptedParams: encryptedParams,
@@ -158,6 +163,10 @@ class QsSubscribeReport {
     if (encryptedParams.isEmpty) {
       QsLog.error("加密失败");
       return false;
+    }
+
+    if (kDebugMode) {
+      QsLog.info("订阅上报请求: $apiUrl\n接口参数: $content");
     }
 
     return _reportEncryptedSubscribtionInfo(
